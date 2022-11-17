@@ -27,7 +27,9 @@ import {
   IconChartArcs,
   IconWaveSine,
   IconChartDots,
+  IconSettings,
 } from '@tabler/icons';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -104,13 +106,23 @@ export default function MenuDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  const navigate = useNavigate();
+
+  const handleClick = (path: string) => {
+    navigate(path);
+  };
+
   const menuVariable = [
-    { icon: <IconEngine />, name: 'Двигатель' },
-    { icon: <IconManualGearbox />, name: 'Система' },
-    { icon: <IconChartArcs />, name: 'Фазовые диграммы' },
-    { icon: <IconChartLine />, name: 'Собственные частоты и формы' },
-    { icon: <IconWaveSine />, name: 'Резонансные режимы' },
-    { icon: <IconChartDots />, name: 'Напряжение' },
+    { icon: <IconEngine />, name: 'Двигатель', path: '/' },
+    { icon: <IconManualGearbox />, name: 'Система', path: '/system' },
+    { icon: <IconChartArcs />, name: 'Фазовые диграммы', path: '/diagramm' },
+    {
+      icon: <IconChartLine />,
+      name: 'Собственные частоты и формы',
+      path: '/forms',
+    },
+    { icon: <IconWaveSine />, name: 'Резонансные режимы', path: '/resonance' },
+    { icon: <IconChartDots />, name: 'Напряжение', path: '/strain' },
   ];
 
   const handleDrawerOpen = () => {
@@ -193,6 +205,7 @@ export default function MenuDrawer() {
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
+                onClick={() => handleClick(elem.path)}
               >
                 <ListItemIcon
                   sx={{
@@ -214,7 +227,35 @@ export default function MenuDrawer() {
             </ListItem>
           ))}
         </List>
-        {/* <Divider /> */}
+        <Divider />
+        <ListItem disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
+            sx={{
+              minHeight: 55,
+              maxHeight: 55,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
+            }}
+            onClick={() => handleClick('/settings')}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}
+            >
+              <IconSettings />
+            </ListItemIcon>
+            <ListItemText
+              primary="Настройки"
+              sx={{
+                opacity: open ? 1 : 0,
+                whiteSpace: 'pre-wrap',
+              }}
+            />
+          </ListItemButton>
+        </ListItem>
         {/* <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
