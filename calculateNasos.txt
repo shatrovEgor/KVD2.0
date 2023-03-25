@@ -1,0 +1,30 @@
+//Насос
+let ηe, qm, Ne; // вводим
+
+let QM = (qm * Ne) / ηe; // выводим
+const cm = 2.1,
+  den = 900,
+  dT = 18;
+let Vc = QM / den / cm / dT;
+const kd = 2.5,
+  ηn = 0.7;
+let Vt = (Vc * kd) / ηn; //Выводим
+
+let m,
+  z,
+  h = 2 * m; //ввод список
+const Un = 9;
+let D0 = z * m,
+  D = m * (z + 2),
+  nh = (Un * 60) / D / Math.PI,
+  b = (60 * Vt) / (2 * Math.PI * m * m * z * nh);
+const p = 506500,
+  ηm = 0.89;
+let Nn = (Vt * p) / 1000 / ηm; //вывод
+//Радиатор
+let Km = 1 / (1 / α1 + δ / λst + 1 / α2);
+let α1,
+  δ = 0.35,
+  α2,
+  λst; // α1 ползунок 100-1400 λst 10-125 α2 2300-4100
+let Tmav;
