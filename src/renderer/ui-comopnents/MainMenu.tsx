@@ -30,6 +30,7 @@ import {
   IconSettings,
 } from '@tabler/icons';
 import { useNavigate } from 'react-router-dom';
+import FistTimeOpenDialog from './FirstTimeOpenDialog';
 
 const drawerWidth = 240;
 
@@ -102,7 +103,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MenuDrawer() {
+export default function MenuDrawer({ children }: any) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -114,15 +115,20 @@ export default function MenuDrawer() {
 
   const menuVariable = [
     { icon: <IconEngine />, name: 'Двигатель', path: '/' },
-    { icon: <IconManualGearbox />, name: 'Система', path: '/system' },
-    { icon: <IconChartArcs />, name: 'Фазовые диграммы', path: '/diagramm' },
+    {
+      icon: <IconManualGearbox />,
+      name: 'Шестерентчатый насос',
+      path: '/system',
+    },
+    { icon: <IconChartArcs />, name: 'Героторный насос', path: '/diagramm' },
     {
       icon: <IconChartLine />,
-      name: 'Собственные частоты и формы',
+      name: 'Пластинтчатый насос',
       path: '/forms',
     },
-    { icon: <IconWaveSine />, name: 'Резонансные режимы', path: '/resonance' },
-    { icon: <IconChartDots />, name: 'Напряжение', path: '/strain' },
+    // ,
+    // { icon: <IconWaveSine />, name: 'Резонансные режимы', path: '/resonance' },
+    // { icon: <IconChartDots />, name: 'Напряжение', path: '/strain' },
   ];
 
   const handleDrawerOpen = () => {
@@ -134,7 +140,7 @@ export default function MenuDrawer() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', height: '100vh', width: '100vw' }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -155,23 +161,11 @@ export default function MenuDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            KVD 2.0
+            Расчет масляного насоса
           </Typography>
         </Toolbar>
-        {/* <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          edge="start"
-          sx={{
-            marginRight: 5,
-            ...(open && { display: 'none' }),
-          }}
-        >
-          <MenuIcon />
-        </IconButton> */}
         <Typography variant="h6" noWrap component="div">
-          KVD 2.0
+          Расчет масляного насоса
         </Typography>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -256,33 +250,11 @@ export default function MenuDrawer() {
             />
           </ListItemButton>
         </ListItem>
-        {/* <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List> */}
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <FistTimeOpenDialog />
         <DrawerHeader />
+        {children}
       </Box>
     </Box>
   );
